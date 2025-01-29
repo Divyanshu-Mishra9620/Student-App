@@ -6,10 +6,8 @@ import LockIcon from "@mui/icons-material/Lock";
 const LoginLayout = styled.main`
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 48rem;
-  align-items: center;
-  justify-items: center;
-  gap: 3.2rem;
+  grid-template-columns: 1fr; 
+  place-items: center; /
   background-color: var(--color-grey-50);
 `;
 
@@ -31,6 +29,8 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn }) => {
           borderRadius: "8px",
           boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
           padding: "2rem",
+          width: "100%",
+          maxWidth: "400px",
         }}
       >
         <IconButton color="primary" sx={{ fontSize: 50 }}>
