@@ -111,10 +111,7 @@ const StudentsPage = () => {
     fetchStudents();
   }, []);
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
+  const handleChangePage = (newPage: number) => {
     setPage(newPage);
   };
 
