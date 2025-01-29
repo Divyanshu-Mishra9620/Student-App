@@ -53,9 +53,7 @@ function App() {
 
           <Route
             path="/login"
-            element={
-              <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-            }
+            element={<Login setIsLoggedIn={setIsLoggedIn} />}
           />
           <Route
             path="*"
