@@ -6,11 +6,10 @@ import { TextField, Button, Container, Typography } from "@mui/material";
 import toast from "react-hot-toast";
 
 interface LoginFormProps {
-  isLoggedIn: boolean;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ isLoggedIn, setIsLoggedIn }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState("admin@123.com");
   const [password, setPassword] = useState("admin@123");
   const [error, setError] = useState("");
@@ -21,8 +20,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ isLoggedIn, setIsLoggedIn }) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       toast.success("User logged in successfully");
-      setIsLoggedIn(true); // Update the state
-      navigate("/students", { replace: true }); // Navigate to the Student page
+      setIsLoggedIn(true);
+      navigate("/students", { replace: true });
     } catch (err) {
       setError("Invalid email or password");
     }

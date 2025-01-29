@@ -1,24 +1,23 @@
 import styled from "styled-components";
 import LoginForm from "../features/LoginForm";
 import { Box, Typography, IconButton } from "@mui/material";
-import LockIcon from "@mui/icons-material/Lock"; // Import Material UI icon
+import LockIcon from "@mui/icons-material/Lock";
 
 const LoginLayout = styled.main`
   min-height: 100vh;
   display: grid;
   grid-template-columns: 48rem;
-  align-items: center; /* Vertically center */
-  justify-items: center; /* Horizontally center */
+  align-items: center;
+  justify-items: center;
   gap: 3.2rem;
   background-color: var(--color-grey-50);
 `;
 
 interface LoginProps {
-  isLoggedIn: boolean;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Login: React.FC<LoginProps> = ({ isLoggedIn, setIsLoggedIn }) => {
+const Login: React.FC<LoginProps> = ({ setIsLoggedIn }) => {
   return (
     <LoginLayout>
       <Box
@@ -40,7 +39,7 @@ const Login: React.FC<LoginProps> = ({ isLoggedIn, setIsLoggedIn }) => {
         <Typography variant="h5" component="h1" align="center">
           Log in to your account
         </Typography>
-        <LoginForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        <LoginForm setIsLoggedIn={setIsLoggedIn} />
       </Box>
     </LoginLayout>
   );
