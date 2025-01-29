@@ -23,7 +23,6 @@ import {
   TextField,
   TablePagination,
 } from "@mui/material";
-import { DashboardContent } from "../layouts/dashboard";
 import AddStudentModal from "../components/AddStudentModal";
 import { Visibility, Edit, Delete } from "@mui/icons-material";
 
@@ -112,7 +111,10 @@ const StudentsPage = () => {
     fetchStudents();
   }, []);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
     setPage(newPage);
   };
 
@@ -126,95 +128,92 @@ const StudentsPage = () => {
   const totalPages = Math.ceil(students.length / rowsPerPage);
 
   return (
-    <DashboardContent>
-      <Container>
-        <Box
-          display="flex"
-          alignItems="center"
-          mb={5}
-          sx={{ flexDirection: { xs: "column", sm: "row" } }}
-        >
-          <Typography variant="h4" flexGrow={1} sx={{ mb: { xs: 2, sm: 0 } }}>
-            Students
-          </Typography>
-          <Button variant="contained" color="primary" onClick={handleOpen}>
-            Add Student
-          </Button>
-          <Modal open={open} onClose={handleClose}>
-            <Box sx={style}>
-              <Typography variant="h6">Fill the Form</Typography>
-              <AddStudentModal
-                isOpen={open}
-                onClose={() => setOpen(false)}
-                onSave={() => {
-                  fetchStudents();
-                  setOpen(false);
-                }}
-              />
-            </Box>
-          </Modal>
-        </Box>
-        <TableContainer>
-          <Table sx={{ minWidth: 800 }}>
-            <TableHead>
-              <TableRow>
-                <TableCell>ID</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Class</TableCell>
-                <TableCell>Section</TableCell>
-                <TableCell>Roll Number</TableCell>
-                <TableCell>Action</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {students
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((student) => (
-                  <TableRow key={student.id}>
-                    <TableCell>{student.id}</TableCell>
-                    <TableCell>{student.name}</TableCell>
-                    <TableCell>{student.class}</TableCell>
-                    <TableCell>{student.section}</TableCell>
-                    <TableCell>{student.rollNumber}</TableCell>
-                    <TableCell>
-                      <IconButton
-                        color="primary"
-                        onClick={() => handleViewOpen(student)}
-                      >
-                        <Visibility />
-                      </IconButton>
-                      <IconButton
-                        color="success"
-                        onClick={() => handleEditOpen(student)}
-                      >
-                        <Edit />
-                      </IconButton>
-                      <IconButton
-                        color="error"
-                        onClick={() => handleDelete(student.id)}
-                      >
-                        <Delete />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+    <Container>
+      <Box
+        display="flex"
+        alignItems="center"
+        mb={5}
+        sx={{ flexDirection: { xs: "column", sm: "row" } }}
+      >
+        <Typography variant="h4" flexGrow={1} sx={{ mb: { xs: 2, sm: 0 } }}>
+          Students
+        </Typography>
+        <Button variant="contained" color="primary" onClick={handleOpen}>
+          Add Student
+        </Button>
+        <Modal open={open} onClose={handleClose}>
+          <Box sx={style}>
+            <Typography variant="h6">Fill the Form</Typography>
+            <AddStudentModal
+              isOpen={open}
+              onClose={() => setOpen(false)}
+              onSave={() => {
+                fetchStudents();
+                setOpen(false);
+              }}
+            />
+          </Box>
+        </Modal>
+      </Box>
+      <TableContainer>
+        <Table sx={{ minWidth: 800 }}>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Class</TableCell>
+              <TableCell>Section</TableCell>
+              <TableCell>Roll Number</TableCell>
+              <TableCell>Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {students
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((student) => (
+                <TableRow key={student.id}>
+                  <TableCell>{student.id}</TableCell>
+                  <TableCell>{student.name}</TableCell>
+                  <TableCell>{student.class}</TableCell>
+                  <TableCell>{student.section}</TableCell>
+                  <TableCell>{student.rollNumber}</TableCell>
+                  <TableCell>
+                    <IconButton
+                      color="primary"
+                      onClick={() => handleViewOpen(student)}
+                    >
+                      <Visibility />
+                    </IconButton>
+                    <IconButton
+                      color="success"
+                      onClick={() => handleEditOpen(student)}
+                    >
+                      <Edit />
+                    </IconButton>
+                    <IconButton
+                      color="error"
+                      onClick={() => handleDelete(student.id)}
+                    >
+                      <Delete />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-        {/* Conditionally Render Pagination */}
-        {totalPages > 1 && (
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 15]}
-            component="div"
-            count={students.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        )}
-      </Container>
+      {totalPages > 1 && (
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 15]}
+          component="div"
+          count={students.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      )}
 
       {/* View Student Modal */}
       <Modal open={viewOpen} onClose={handleViewClose}>
@@ -321,7 +320,7 @@ const StudentsPage = () => {
           )}
         </Box>
       </Modal>
-    </DashboardContent>
+    </Container>
   );
 };
 
