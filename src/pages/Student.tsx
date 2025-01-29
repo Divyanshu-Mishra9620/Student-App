@@ -111,7 +111,11 @@ const StudentsPage = () => {
     fetchStudents();
   }, []);
 
-  const handleChangePage = (newPage: number) => {
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
+    newPage: number
+  ) => {
+    event?.preventDefault();
     setPage(newPage);
   };
 
@@ -207,7 +211,7 @@ const StudentsPage = () => {
           count={students.length}
           rowsPerPage={rowsPerPage}
           page={page}
-          onPageChange={handleChangePage}
+          onPageChange={(event, newPage) => handleChangePage(event, newPage)}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       )}
